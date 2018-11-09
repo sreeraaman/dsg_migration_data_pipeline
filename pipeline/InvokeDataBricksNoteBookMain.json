@@ -1,0 +1,38 @@
+{
+	"name": "InvokeDataBricksNoteBookMain",
+	"properties": {
+		"activities": [
+			{
+				"name": "Notebook1",
+				"type": "DatabricksNotebook",
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"typeProperties": {
+					"notebookPath": "/dsg_ingestion/adls_test",
+					"baseParameters": {
+						"country": {
+							"value": "@pipeline().parameters.country",
+							"type": "Expression"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureDatabricks1",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"parameters": {
+			"country": {
+				"type": "String",
+				"defaultValue": "KH"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
